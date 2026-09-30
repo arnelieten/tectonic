@@ -8,6 +8,7 @@ type Props = {
   house: House
   onClose: () => void
   onReplay: () => void
+  onChecklist: () => void
 }
 
 const percent = (value: number) => `${value.toLocaleString(LOCALE)}%`
@@ -59,7 +60,7 @@ function Slider({
   )
 }
 
-export default function KbcPaySheet({ house, onClose, onReplay }: Props) {
+export default function KbcPaySheet({ house, onClose, onReplay, onChecklist }: Props) {
   const [phase, setPhase] = useState<PayPhase>('ready')
   const [termYears, setTermYears] = useState(TERM_YEARS.default)
   const [downPayment, setDownPayment] = useState(DOWN_PAYMENT.default)
@@ -111,10 +112,10 @@ export default function KbcPaySheet({ house, onClose, onReplay }: Props) {
           </p>
           <button
             type="button"
-            onClick={onReplay}
+            onClick={onChecklist}
             className="mt-8 h-11 w-full rounded-full bg-kbc-sky text-[16px] font-semibold text-white hover:bg-[#0098d4]"
           >
-            View my home loan
+            Insurance checklist
           </button>
         </div>
       ) : (
