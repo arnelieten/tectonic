@@ -83,7 +83,6 @@ export default function App() {
           />
           <KbcPaySheet
             house={house}
-            imageUrl={imageUrl}
             onClose={() => setScreen('listing')}
             onReplay={replay}
           />

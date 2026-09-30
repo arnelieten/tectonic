@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "title": "Fern Hollow Cottage",
-    "address": "Veldstraat 18, 9000 Gent",
+    "title": "Cool Cottage",
+    "address": "Veldstraat 18, 9000 Ghent",
     "price": 395000,
     "currency": "EUR",
     "bedrooms": 3,
@@ -11,7 +11,7 @@
     "property_type": "cottage",
     "description": "Gray craftsman cottage with white trim, a covered front porch, and a brick walk, set against dense woods.",
     "image": "house 1.jpeg",
-    "reason": "Thomas, after three years of saving from your sales role, this Gent cottage matches your budget and commute. KBC has pre-approved your home loan at your current rate—move from the countryside to the city without stretching every euro."
+    "reason": "Thomas, after three years of saving from your sales role, this Ghent cottage matches your budget and commute. KBC has pre-approved your home loan at your current rate—move from the countryside to the city without stretching every euro."
   },
   {
     "id": 2,

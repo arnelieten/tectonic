@@ -40,22 +40,10 @@ export type House = {
   image: string
 }
 
-const priceFormatter = new Intl.NumberFormat('nl-BE', {
-  style: 'currency',
-  currency: 'EUR',
-  maximumFractionDigits: 0,
-})
+export const LOCALE = 'en-IE'
 
 export function formatPrice(amount: number, currency = 'EUR'): string {
-  if (currency === 'EUR') return priceFormatter.format(amount)
-  return new Intl.NumberFormat('nl-BE', { style: 'currency', currency, maximumFractionDigits: 0 }).format(
-    amount,
-  )
-}
-
-/** Approximate m² from sqft for display */
-export function sqftToSqm(sqft: number): number {
-  return Math.round(sqft * 0.092903)
+  return new Intl.NumberFormat(LOCALE, { style: 'currency', currency, maximumFractionDigits: 0 }).format(amount)
 }
 
 export const api = {

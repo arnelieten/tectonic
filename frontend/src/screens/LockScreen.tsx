@@ -17,8 +17,8 @@ export default function LockScreen({ house, onOpenNotification }: Props) {
   const [{ time, date }] = useState(() => {
     const now = new Date()
     return {
-      time: now.toLocaleTimeString('nl-BE', { hour: '2-digit', minute: '2-digit', hour12: false }),
-      date: now.toLocaleDateString('nl-BE', { weekday: 'long', day: 'numeric', month: 'long' }),
+      time: now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }),
+      date: now.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' }),
     }
   })
 
@@ -28,7 +28,7 @@ export default function LockScreen({ house, onOpenNotification }: Props) {
         className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage:
-            'linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.3) 100%), url(/background.jpeg)',
+            'linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.3) 100%), url(/background.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundColor: '#163861',
@@ -40,7 +40,7 @@ export default function LockScreen({ house, onOpenNotification }: Props) {
         <p className="mt-1 text-[76px] font-extralight leading-none tracking-tight">{time}</p>
       </div>
 
-      <div className="absolute inset-x-0 top-[108px] z-10 px-3">
+      <div className="absolute inset-x-0 top-[196px] z-10 px-3">
         {showNotification && (
           <button
             type="button"
@@ -52,13 +52,13 @@ export default function LockScreen({ house, onOpenNotification }: Props) {
               <div className="min-w-0 flex-1">
                 <div className="flex items-baseline justify-between gap-2">
                   <span className="text-[15px] font-semibold text-kbc-navy">KBC</span>
-                  <span className="shrink-0 text-[13px] text-kbc-slate">nu</span>
+                  <span className="shrink-0 text-[13px] text-kbc-slate">now</span>
                 </div>
                 <p className="mt-0.5 text-[15px] font-semibold leading-snug text-kbc-ink">
                   Buy your house in 5 minutes!
                 </p>
                 <p className="mt-1 line-clamp-2 text-[14px] leading-snug text-kbc-slate">
-                  {house.title} — {house.address}
+                  {house.title} in Ghent
                 </p>
               </div>
             </div>

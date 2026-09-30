@@ -1,7 +1,6 @@
-import type { ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import { formatPrice, type House } from '../api'
-
-const MONTHLY_AMOUNT = 1350
+import { defaultMortgage } from '../mortgage'
 
 type Props = {
   house: House
@@ -74,7 +73,28 @@ function FriendsIcon() {
   )
 }
 
+type VisitSlot = { day: string; time: string; label: string }
+
+function buildVisitSlots(): VisitSlot[] {
+  const times = ['10:00', '17:30']
+  const slots: VisitSlot[] = []
+  for (let offset = 1; slots.length < 6; offset++) {
+    const date = new Date()
+    date.setDate(date.getDate() + offset)
+    if (date.getDay() === 0) continue
+    const day = date.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' })
+    for (const time of times) slots.push({ day, time, label: `${day}, ${time}` })
+  }
+  return slots
+}
+
 export default function ListingScreen({ house, imageUrl, onBack, onPay }: Props) {
+  const monthly = defaultMortgage(house.price).monthly
+  const [slots] = useState(buildVisitSlots)
+  const [visitOpen, setVisitOpen] = useState(false)
+  const [selectedSlot, setSelectedSlot] = useState<number | null>(null)
+  const [bookedSlot, setBookedSlot] = useState<number | null>(null)
+
   return (
     <div className="relative flex h-full flex-col bg-white">
       <div className="relative min-h-0 flex-1 overflow-y-auto pb-24">
@@ -103,13 +123,72 @@ export default function ListingScreen({ house, imageUrl, onBack, onPay }: Props)
         </div>
 
         <div className="px-5 pt-6">
-          <h1 className="text-[24px] font-semibold leading-tight text-kbc-navy">{house.title}</h1>
+          <div className="flex items-center justify-between gap-3">
+            <h1 className="text-[24px] font-semibold leading-tight text-kbc-navy">{house.title}</h1>
+            <button
+              type="button"
+              onClick={() => setVisitOpen((open) => !open)}
+              disabled={bookedSlot !== null}
+              aria-expanded={visitOpen}
+              aria-controls="visit-slots"
+              className="flex h-10 shrink-0 items-center gap-1.5 rounded-full bg-kbc-sky px-5 text-[16px] font-semibold text-white transition hover:bg-[#0098d4] disabled:bg-kbc-sky-tint disabled:text-kbc-navy"
+            >
+              {bookedSlot !== null && (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
+                  <path d="M5 13l4 4L19 7" />
+                </svg>
+              )}
+              {bookedSlot !== null ? 'Visit booked' : 'Book visit'}
+            </button>
+          </div>
+
+          {bookedSlot !== null && (
+            <p className="mt-3 rounded-xl bg-kbc-sky-tint px-4 py-3 text-[15px] text-kbc-navy">
+              See you on <span className="font-semibold">{slots[bookedSlot].label}</span> at Veldstraat 18.
+            </p>
+          )}
+
+          {visitOpen && bookedSlot === null && (
+            <div id="visit-slots" className="mt-4 rounded-xl border border-kbc-line bg-kbc-mist p-4">
+              <p className="text-[15px] font-semibold text-kbc-navy">Pick a time to visit</p>
+              <div className="mt-3 grid grid-cols-2 gap-2" role="radiogroup" aria-label="Visit time">
+                {slots.map((slot, index) => (
+                  <button
+                    key={slot.label}
+                    type="button"
+                    role="radio"
+                    aria-checked={selectedSlot === index}
+                    onClick={() => setSelectedSlot(index)}
+                    className={`rounded-lg border px-3 py-2 text-left transition ${
+                      selectedSlot === index
+                        ? 'border-kbc-sky bg-white ring-2 ring-kbc-sky'
+                        : 'border-kbc-line bg-white hover:border-kbc-sky'
+                    }`}
+                  >
+                    <span className="block text-[13px] text-kbc-slate">{slot.day}</span>
+                    <span className="block text-[15px] font-semibold text-kbc-ink">{slot.time}</span>
+                  </button>
+                ))}
+              </div>
+              <button
+                type="button"
+                disabled={selectedSlot === null}
+                onClick={() => {
+                  setBookedSlot(selectedSlot)
+                  setVisitOpen(false)
+                }}
+                className="mt-4 h-10 w-full rounded-full bg-kbc-sky text-[16px] font-semibold text-white transition hover:bg-[#0098d4] disabled:opacity-40"
+              >
+                Confirm visit
+              </button>
+            </div>
+          )}
 
           <ul className="mt-6 divide-y divide-kbc-line border-y border-kbc-line">
-            <Highlight icon={<PinIcon />} label="Locatie" value="Gent" />
-            <Highlight icon={<EuroIcon />} label="Maandelijks bedrag" value={`${formatPrice(MONTHLY_AMOUNT)}`} />
-            <Highlight icon={<BriefcaseIcon />} label="Werk" value="5 km van werk" />
-            <Highlight icon={<FriendsIcon />} label="Vrienden" value="Dichtbij vrienden" />
+            <Highlight icon={<PinIcon />} label="Location" value="Ghent" />
+            <Highlight icon={<EuroIcon />} label="Monthly payment" value={formatPrice(monthly)} />
+            <Highlight icon={<BriefcaseIcon />} label="Commute" value="5 km from work" />
+            <Highlight icon={<FriendsIcon />} label="Friends" value="Close to your friends" />
           </ul>
         </div>
       </div>
@@ -117,8 +196,8 @@ export default function ListingScreen({ house, imageUrl, onBack, onPay }: Props)
       <div className="absolute bottom-0 left-0 right-0 border-t border-kbc-line bg-white px-5 pb-8 pt-3 shadow-[0_-4px_24px_rgba(22,56,97,0.08)]">
         <div className="flex items-center justify-between gap-4">
           <p className="text-[20px] font-semibold text-kbc-navy">
-            {formatPrice(MONTHLY_AMOUNT)}
-            <span className="text-[15px] font-normal text-kbc-slate"> / maand</span>
+            {formatPrice(monthly)}
+            <span className="text-[15px] font-normal text-kbc-slate"> / month</span>
           </p>
           <button
             type="button"

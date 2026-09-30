@@ -50,7 +50,7 @@ function StatusBar({ light, time }: { light: boolean; time: string }) {
 
 export default function PhoneFrame({ children, lightStatus = false }: Props) {
   const [statusTime] = useState(() =>
-    new Date().toLocaleTimeString('nl-BE', { hour: '2-digit', minute: '2-digit', hour12: false }),
+    new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }),
   )
 
   return (
