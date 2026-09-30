@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "title": "Fern Hollow Cottage",
+    "address": "Veldstraat 18, 9000 Gent",
+    "price": 395000,
+    "currency": "EUR",
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "sqft": 1460,
+    "property_type": "cottage",
+    "description": "Gray craftsman cottage with white trim, a covered front porch, and a brick walk, set against dense woods.",
+    "image": "house 1.jpeg",
+    "reason": "Thomas, after three years of saving from your sales role, this Gent cottage matches your budget and commute. KBC has pre-approved your home loan at your current rate—move from the countryside to the city without stretching every euro."
+  },
+  {
+    "id": 2,
+    "title": "3024 Cedar Crest",
+    "address": "Kerkstraat 3024, 3000 Leuven",
+    "price": 825000,
+    "currency": "EUR",
+    "bedrooms": 5,
+    "bathrooms": 3.5,
+    "sqft": 3240,
+    "property_type": "single-family",
+    "description": "Two-story family house with light gray siding, a three-car garage, and a wide front lawn.",
+    "image": "house 2.jpeg",
+    "reason": "Room to grow near Leuven's universities and employers, with space for a home office and family visits from the countryside."
+  },
+  {
+    "id": 3,
+    "title": "Blueframe Residences, Apt 6C",
+    "address": "Harborline 410, bus 6C, 2000 Antwerpen",
+    "price": 318000,
+    "currency": "EUR",
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "sqft": 1050,
+    "property_type": "apartment",
+    "description": "Two-bedroom unit in a gated mid-rise with blue balcony rails, white frames, and a covered entry.",
+    "image": "house 3.jpeg",
+    "reason": "A lock-and-leave city base in Antwerp—ideal if you want nightlife and trams at the door while you build equity."
+  },
+  {
+    "id": 4,
+    "title": "Journal Printers Loft",
+    "address": "Mercerstraat 77, 1000 Brussel",
+    "price": 1095000,
+    "currency": "EUR",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "sqft": 1680,
+    "property_type": "loft",
+    "description": "Brick walk-up loft with iron fire escapes and a faded Journal Printers ghost sign on the facade.",
+    "image": "house 4.jpeg",
+    "reason": "Character loft in Brussels for buyers who prioritize creative districts and short walks to EU institutions."
+  },
+  {
+    "id": 5,
+    "title": "Ivy Gate Victorian",
+    "address": "Orchardweg 9, 2800 Mechelen",
+    "price": 68500,
+    "currency": "EUR",
+    "bedrooms": 4,
+    "bathrooms": 1,
+    "sqft": 2210,
+    "property_type": "fixer-upper",
+    "description": "Peeling pink Victorian with twin chimneys and ivy over the porch. Sold as a full renovation project.",
+    "image": "house 5.jpeg",
+    "reason": "Project buyers who want Victorian bones between Brussels and Antwerp—pair with a KBC renovation budget line."
+  }
+]

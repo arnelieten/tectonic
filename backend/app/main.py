@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.auth import ApiKeyDep
 from app.config import CORS_ORIGINS
-from app.routers import ai, items
+from app.routers import ai, houses, items
 
 
 @asynccontextmanager
@@ -24,6 +24,7 @@ app.add_middleware(
 )
 
 app.include_router(items.router)
+app.include_router(houses.router)
 app.include_router(ai.router)
 
 
