@@ -36,9 +36,5 @@ uv run fastapi dev --port 8000
 - `frontend/src/api.ts`: fetch wrapper that adds the API key
 - `frontend/src/App.tsx`: starter page
 
-## Agent skills
-
-These live in `.agents/skills/`
-
-- `fastapi`: the official FastAPI conventions
-- `frontend-design`: Anthropic's skill for building a distinctive UI
+## Video Creation
+Repoclip look at the storyline.md and agent.md to creat a compelling video.

@@ -1,0 +1,26 @@
+---
+description: Git workflow. Never commit or push directly to main; work on a branch and merge only working code.
+alwaysApply: true
+---
+
+# Git workflow: main is always a working version
+
+- Never commit directly on `main` and never `git push` work-in-progress to `main`.
+- Before the first commit of any change, check the branch with `git branch --show-current`. If it's `main`, create a branch first: `git switch -c <type>/<short-name>` (for example `feat/pixel-frontend`, `fix/chat-error`).
+- Commit and push on the branch as often as you like: `git push -u origin <branch>`.
+- Merge into `main` only when the change works:
+  - Frontend: `npm --prefix frontend run build` and `npm --prefix frontend run lint` pass.
+  - Backend: `cd backend && uv run ruff check .` passes and `uv run fastapi dev` starts without errors.
+- When the user says the branch is ready, merge and push:
+
+```bash
+git switch main
+git pull
+git merge --no-ff <branch>
+git push
+git branch -d <branch>
+```
+
+- If checks fail, fix them on the branch. Don't merge a broken branch "to fix later".
+- Never force-push to `main` or rewrite its history.
+- Don't merge into `main` without the user confirming the branch is ready.
