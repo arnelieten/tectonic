@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 import { api, type House } from './api'
 import PhoneFrame from './components/PhoneFrame'
+import ChecklistScreen from './screens/ChecklistScreen'
 import KbcPaySheet from './screens/KbcPaySheet'
 import ListingScreen from './screens/ListingScreen'
 import LockScreen from './screens/LockScreen'
 
-type Screen = 'lock' | 'listing' | 'pay'
+type Screen = 'lock' | 'listing' | 'pay' | 'checklist'
 
 const DEMO_HOUSE_ID = 1
 
@@ -85,9 +86,11 @@ export default function App() {
             house={house}
             onClose={() => setScreen('listing')}
             onReplay={replay}
+            onChecklist={() => setScreen('checklist')}
           />
         </>
       )}
+      {screen === 'checklist' && <ChecklistScreen onFinish={replay} />}
     </PhoneFrame>
   )
 }
